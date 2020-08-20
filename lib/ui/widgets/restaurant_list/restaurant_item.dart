@@ -7,9 +7,13 @@ class RestaurantItem extends StatelessWidget
 	RestaurantItem(this._restaurant, {Key key}):
 		super(key:key);
 	@override
-	Widget build(BuildContext context)=> Card(
+	Widget build(BuildContext context)=> Padding(
+			padding: LIST_SEPARATOR_PADDING,
+			child:Card(
+					elevation:ELEVATION,
 					shape: BORDER_SHAPE,
-					child: Column(
+					child: Wrap(
+						runSpacing:DEFAULT_SPACING,
 						children: [
 							Container(
 									decoration: BoxDecoration(
@@ -27,31 +31,34 @@ class RestaurantItem extends StatelessWidget
 						Align(
 								alignment:Alignment.centerLeft,
 						child: Padding(
-								padding:EdgeInsets.only(left:10.0),
-								child:Column(
-								crossAxisAlignment: CrossAxisAlignment.start,
-								mainAxisAlignment: MainAxisAlignment.start,
+								padding:EdgeInsets.only(left:10),
+								child: Wrap(
+								runSpacing: DEFAULT_SPACING,
 					children: [
 						Text(_restaurant.name,
 								style: Theme.of(context).textTheme.headline6
 								),
 						Row(
+								crossAxisAlignment: CrossAxisAlignment.end,
 								children:[
 								Icon(Icons.star),
 								Text(_restaurant.rating.toString(),
-										style:Theme.of(context).textTheme.headline6.copyWith(color:Theme.of(context).accentColor)),
+										style:Theme.of(context).textTheme.headline6.copyWith(
+												color:Theme.of(context).accentColor)),
 								SizedBox(width:7.0),
 							Text(_restaurant.cuisine,
 									style: Theme.of(context).textTheme.caption,
 									textAlign:TextAlign.right
 									)
 						]
-						)
+						),
 					]
 						)
 						)
-			)
+			),
+						SizedBox(height: DEFAULT_SPACING/2, width:1)
 			]
+			)
 			)
 			);
 }
