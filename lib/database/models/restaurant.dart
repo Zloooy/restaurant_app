@@ -4,9 +4,11 @@ class Restaurant
 {
 	String id;
 	String name;
+	String cuisine;
 	String address;
-	final String mainImagePath;
 	List<String> tags;
-	Restaurant({@required this.id,  @required this.name, @required this.address, @required this.tags, @required this.mainImagePath});
+	double rating;
+	final String mainImagePath;
+	Restaurant({@required this.id,  @required this.name, @required this.cuisine, @required this.address, @required this.tags, @required this.mainImagePath, @required this.rating});
 	ImageProvider<dynamic> get mainImage => AssetImage(mainImagePath);
 }

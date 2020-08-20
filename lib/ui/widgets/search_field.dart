@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/ui/themes/theme_constants.dart';
 class SearchField extends StatefulWidget
 {
 	final void Function(String) _searchCallback;
@@ -9,8 +10,8 @@ class SearchField extends StatefulWidget
 class _SearchFieldState extends State<SearchField>
 {
 	final void Function(String) _searchCallback;
-	final TextEditingController _textController = new TextEditingController();
 	final Key _fieldkey= new GlobalKey<_SearchFieldState>();
+	final TextEditingController _textController = new TextEditingController();
 	_SearchFieldState(this._searchCallback);
 	@override
 	Widget build(BuildContext context) =>
@@ -20,32 +21,28 @@ class _SearchFieldState extends State<SearchField>
 		key:_fieldkey,
 		children:[
 		Expanded(
-				flex:9,
+				flex:8,
 				child:TextField(
 						decoration: new InputDecoration(
 								filled:true,
-								fillColor: Colors.white,
-								border: new OutlineInputBorder(
-										borderRadius: const BorderRadius.all(
-												const Radius.circular(18.0)),
-											borderSide: BorderSide(color:Colors.grey)
-									)
+								border: INPUT_BORDER
+									),
+						controller: _textController
 						),
-						controller: _textController)
 			),
 		Expanded(
 				flex:1,
+				child:SizedBox()
+		),
+		Expanded(
+				flex:1,
 				child:FlatButton(
-						shape: RoundedRectangleBorder(
-								side: BorderSide(color:Colors.grey),
-								borderRadius: BorderRadius.all(Radius.circular(18.0)),
-						),
+						shape: BORDER_SHAPE,
 						child:Icon(Icons.search),
 						onPressed: ()=>_searchCallback(_textController.text)
 						)
-			)
-	])
-	);
+				)
+	]));
 	@override
 	void dispose()
 	{

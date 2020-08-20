@@ -8,8 +8,8 @@ class RestaurantList extends StatelessWidget
 	@override
 	Widget build(BuildContext context) => SliverList(
 			delegate:SliverChildBuilderDelegate(
-				(BuildContext context, int i) =>
-					(i<_restaurants.length) ? RestaurantItem(_restaurants[i]) : null
+				(BuildContext context, int i) => RestaurantItem(_restaurants[i]),
+				childCount: _restaurants.length
 					)
 			);
 }
