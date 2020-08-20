@@ -16,7 +16,26 @@ class RestaurantDatabase
 					cuisine:"Американская кухня",
 					mainImagePath: "assets/burger_shot.jpg",
 					address: "ул. Ивана Иванова, 2",
-					tags: ["фастфуд"])
+					tags: ["фастфуд"]
+					),
+			Restaurant(
+					id:"2",
+					name:"Well Stacked Pizza",
+					rating: 5.0,
+					cuisine:"Итальянская кухня",
+					mainImagePath: "assets/well_stacked_pizza.jpg",
+					address: "ул. Ивана Федорова, 33",
+					tags: ["пицца"]
+					),
+			Restaurant(
+					id:"3",
+					name:"Cluckin' Bell",
+					rating: 4.5,
+					cuisine:"Американская кухня",
+					mainImagePath: "assets/cluckin_bell.jpg",
+					address: "ул. Васи Пупкина, 43",
+					tags: ["цыплёнок"]
+					),
 		];
 	}
 
