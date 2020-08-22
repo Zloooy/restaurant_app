@@ -3,33 +3,48 @@ import 'package:restaurant_app/database/index.dart';
 class RestaurantSearchBloc
 {
 	RestaurantDatabase _db = RestaurantDatabase();
-	BehaviorSubject<List<Restaurant>> _listItemHandler;
-	Stream<List<Restaurant>> _listItemHandlerStream;
-	BehaviorSubject<String> _resturantNameHandler = new BehaviorSubject<String>();
-	BehaviorSubject<String> _resturantTagHandler = new BehaviorSubject<String>();
+	BehaviorSubject<List<Restaurant>> _restaurantListHandler;
+	Stream<List<Restaurant>> _restaurantListHandlerStream;
+	BehaviorSubject<List<Holiday>> _holidayListHandler;
+	Stream<List<Holiday>> _holidayListHandlerStream;
+	BehaviorSubject<String> _restaurantNameHandler = new BehaviorSubject<String>();
+	BehaviorSubject<String> _restaurantTagHandler = new BehaviorSubject<String>();
+	BehaviorSubject<Holiday> _restaurantHolidayHandler = new BehaviorSubject<Holiday>();
 	BehaviorSubject<List<String>> _restaurantTagListHandler;
 	BehaviorSubject<Null> _restaurantAllHandler = new BehaviorSubject<Null>();
+	BehaviorSubject<Null> _holidayHandler = new BehaviorSubject<Null>();
 	RestaurantSearchBloc()
 	{
-		_listItemHandler = new BehaviorSubject<List<Restaurant>>.seeded(_db.getRestaurants());
-		_listItemHandlerStream = _listItemHandler.mergeWith([
-			_resturantNameHandler.stream.map<List<Restaurant>>(_db.getRestaurantsByName),
-			_resturantTagHandler.stream.map<List<Restaurant>>(_db.getRestaurantsByTag),
+		_restaurantListHandler = new BehaviorSubject<List<Restaurant>>.seeded(_db.getRestaurants());
+		_restaurantListHandlerStream = _restaurantListHandler.mergeWith([
+			_restaurantNameHandler.stream.map<List<Restaurant>>(_db.getRestaurantsByName),
+			_restaurantTagHandler.stream.map<List<Restaurant>>(_db.getRestaurantsByTag),
+			_restaurantHolidayHandler.map<List<Restaurant>>(_db.getRestaurantByHoliday),
 			_restaurantAllHandler.stream.map<List<Restaurant>>((_)=>_db.getRestaurants())
 		]);
 		_restaurantTagListHandler = new BehaviorSubject<List<String>>.seeded(_db.getRestaurantTags());
+		_holidayListHandler = new BehaviorSubject<List<Holiday>>.seeded(_db.getHolidays());
+		_holidayListHandlerStream = _holidayListHandler.mergeWith([
+			_holidayHandler.map((_)=>_db.getHolidays())
+		]);
 	}
-	Stream<List<Restaurant>> get restaurantListStream => _listItemHandlerStream;
+	Stream<List<Restaurant>> get restaurantListStream => _restaurantListHandlerStream;
 	Stream<List<String>> get tagStream => _restaurantTagListHandler.stream;
-	void searchByName(String name) => _resturantNameHandler.sink.add(name);
-	void searchByTag(String tag) => _resturantTagHandler.sink.add(tag);
+	Stream<List<Holiday>> get holidayStream => _holidayListHandlerStream;
+	void searchByName(String name) => _restaurantNameHandler.sink.add(name);
+	void searchByTag(String tag) => _restaurantTagHandler.sink.add(tag);
+	void searchByHoliday(Holiday holiday) => _restaurantHolidayHandler.sink.add(holiday);
+	void getHolidays() => _holidayHandler.sink.add(null);
 	void getAll() => _restaurantAllHandler.sink.add(null);
 	void dispose()
 	{
-		_resturantTagHandler.close();
-		_resturantNameHandler.close();
-		_listItemHandler.close();
+		_restaurantTagHandler.close();
+		_restaurantNameHandler.close();
+		_restaurantListHandler.close();
 		_restaurantTagListHandler.close();
 		_restaurantAllHandler.close();
+		_restaurantHolidayHandler.close();
+		_holidayHandler.close();
+		_holidayListHandler.close();
 	}
 }

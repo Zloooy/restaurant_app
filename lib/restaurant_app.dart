@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/ui/screens/auth/auth_screen.dart';
-import 'package:restaurant_app/ui/screens/landing/landing_screen.dart';
-import 'package:restaurant_app/ui/screens/main_menu/main_menu_screen.dart';
 import 'package:restaurant_app/ui/themes/theme_bloc.dart';
-class RestaurantApp extends StatelessWidget
+import 'package:restaurant_app/ui/routing/routes.dart';
+class RestaurantApp extends StatefulWidget
 {
-	final ThemeBloc _theme_bloc = ThemeBloc();
+	@override
+	_RestaurantAppState createState() => new _RestaurantAppState();
+}
+class _RestaurantAppState extends State<RestaurantApp>
+{
+	final ThemeBloc _themeBloc = ThemeBloc();
 	@override
 	Widget build(BuildContext context)
 	{
 		return StreamBuilder<ThemeData>(
-				stream:_theme_bloc.theme_stream,
+				stream:_themeBloc.themeStream,
 				builder: (context, snapshot) => MaterialApp(
-						home:new LandingScreen(),
-						theme:snapshot.data
+						theme:snapshot.data,
+						initialRoute:RestaurantRouter.initialRoute,
+						onGenerateRoute: RestaurantRouter.generateRoute,
 						)
 		);
+	}
+	@override
+	void dispose()
+	{
+		super.dispose();
+		_themeBloc.dispose();
 	}
 }

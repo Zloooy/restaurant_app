@@ -15,8 +15,13 @@ class ThemeBloc
 		_themeDataController = new BehaviorSubject<ThemeData>.seeded(DEFAULT_THEME),
 		_themeNameController = new BehaviorSubject<String>()
 	{
-		_themeDataOutput = _themeDataController.mergeWith([_themeNameController.where(theme_dict.containsKey).distinct().map((theme_name)=>theme_dict[theme_name])]);
+		_themeDataOutput = _themeDataController.mergeWith([_themeNameController.where(theme_dict.containsKey).distinct().map((themeName)=>theme_dict[themeName])]);
 	}
-	Stream<ThemeData> get theme_stream => _themeDataOutput;
-	void setTheme(String theme_name) => _themeNameController.add(theme_name);
+	Stream<ThemeData> get themeStream => _themeDataOutput;
+	void setTheme(String themeName) => _themeNameController.add(themeName);
+	void dispose()
+	{
+		_themeDataController.close();
+		_themeNameController.close();
+	}
 }

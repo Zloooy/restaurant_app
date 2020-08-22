@@ -5,6 +5,7 @@ class RestaurantDatabase
 {
 	static final RestaurantDatabase _singleton = RestaurantDatabase._create();
 	List<Restaurant> _restaurants;
+	List<Holiday> _holidays;
 	factory RestaurantDatabase() => _singleton;
 	RestaurantDatabase._create()
 	{
@@ -34,8 +35,16 @@ class RestaurantDatabase
 					cuisine:"Американская кухня",
 					mainImagePath: "assets/cluckin_bell.jpg",
 					address: "ул. Васи Пупкина, 43",
-					tags: ["цыплёнок"]
+					tags: ["цыплёнок"],
+					holidayIds: ["new_year"],
 					),
+		];
+		_holidays = [
+			Holiday(
+					id: "new_year",
+					name: "Новый год",
+					iconPath:"assets/new_year.png"
+			)
 		];
 	}
 
@@ -54,6 +63,10 @@ class RestaurantDatabase
 			filter:(r)=>r.tags.contains(tag),
 			sorter:sorter
 			);
+	List<Restaurant> getRestaurantByHoliday(Holiday holiday) => _getRestaurants(
+			filter: ((r)=> r.holidayIds.contains(holiday.id))
+			);
 	List<Restaurant> getRestaurants() => _restaurants;
+	List<Holiday> getHolidays() => _holidays;
 	List<String> getRestaurantTags()=>["фастфуд"];
 }
