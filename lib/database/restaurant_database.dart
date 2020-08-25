@@ -6,6 +6,7 @@ class RestaurantDatabase
 	static final RestaurantDatabase _singleton = RestaurantDatabase._create();
 	List<Restaurant> _restaurants;
 	List<Holiday> _holidays;
+	List<Ad> _ads;
 	factory RestaurantDatabase() => _singleton;
 	RestaurantDatabase._create()
 	{
@@ -46,6 +47,14 @@ class RestaurantDatabase
 					iconPath:"assets/new_year.png"
 			)
 		];
+		_ads = [
+			Ad(
+					imagePath: "assets/ad_1.jpg"
+			),
+			Ad(
+					imagePath: "assets/ad_2.png"
+			)
+		];
 	}
 
 	Iterable<Restaurant> _getRestaurants({RestaurantFilter filter, RestaurantSorter sorter})
@@ -68,5 +77,6 @@ class RestaurantDatabase
 			);
 	List<Restaurant> getRestaurants() => _restaurants;
 	List<Holiday> getHolidays() => _holidays;
+	List<Ad> getAds() => _ads;
 	List<String> getRestaurantTags()=>["фастфуд"];
 }

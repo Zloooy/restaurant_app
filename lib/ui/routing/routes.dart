@@ -5,12 +5,15 @@ MaterialPageRoute _route(Widget f(BuildContext context)) => MaterialPageRoute(bu
 MaterialPageRoute _noContext(Widget f()) => _route((_)=>f());
 class RestaurantRouter
 {
-	static final String initialRoute = landing_route;
+	static final String initialRoute = main_menu_route;
 	static Route<dynamic> generateRoute(RouteSettings settings)
 	{
 		Route<dynamic> res;
 		switch (settings.name)
 		{
+			case main_menu_route:
+				res = _noContext(()=>MainMenuScreen());
+				break;
 			case landing_route:
 				res = _noContext(()=>LandingScreen());
 				break;

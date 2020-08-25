@@ -10,6 +10,9 @@ class RestaurantSearchBloc
 	BehaviorSubject<String> _restaurantNameHandler = new BehaviorSubject<String>();
 	BehaviorSubject<String> _restaurantTagHandler = new BehaviorSubject<String>();
 	BehaviorSubject<Holiday> _restaurantHolidayHandler = new BehaviorSubject<Holiday>();
+	BehaviorSubject<List<Ad>> _adListHandler;
+	BehaviorSubject<Null> _adHandler = new BehaviorSubject<Null>();
+	Stream<List<Ad>> _adHandlerStream;
 	BehaviorSubject<List<String>> _restaurantTagListHandler;
 	BehaviorSubject<Null> _restaurantAllHandler = new BehaviorSubject<Null>();
 	BehaviorSubject<Null> _holidayHandler = new BehaviorSubject<Null>();
@@ -27,14 +30,20 @@ class RestaurantSearchBloc
 		_holidayListHandlerStream = _holidayListHandler.mergeWith([
 			_holidayHandler.map((_)=>_db.getHolidays())
 		]);
+		_adListHandler = new BehaviorSubject<List<Ad>>.seeded(_db.getAds());
+		_adHandlerStream = _adListHandler.mergeWith([
+			_adHandler.map((_)=>_db.getAds())
+		]);
 	}
 	Stream<List<Restaurant>> get restaurantListStream => _restaurantListHandlerStream;
 	Stream<List<String>> get tagStream => _restaurantTagListHandler.stream;
 	Stream<List<Holiday>> get holidayStream => _holidayListHandlerStream;
+	Stream<List<Ad>> get adStream => _adHandlerStream;
 	void searchByName(String name) => _restaurantNameHandler.sink.add(name);
 	void searchByTag(String tag) => _restaurantTagHandler.sink.add(tag);
 	void searchByHoliday(Holiday holiday) => _restaurantHolidayHandler.sink.add(holiday);
 	void getHolidays() => _holidayHandler.sink.add(null);
+	void getAds() => _adHandler.sink.add(null);
 	void getAll() => _restaurantAllHandler.sink.add(null);
 	void dispose()
 	{
@@ -46,5 +55,7 @@ class RestaurantSearchBloc
 		_restaurantHolidayHandler.close();
 		_holidayHandler.close();
 		_holidayListHandler.close();
+		_adHandler.close();
+		_adListHandler.close();
 	}
 }
