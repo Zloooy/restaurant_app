@@ -1,0 +1,14 @@
+analyzer:
+  enable-experiment:
+    - non-nullable
+linter:
+  rules:
+    - cancel_subscriptions
+    - close_sinks
+    - invariant_booleans
+    - no_duplicate_case_values
+    - no_logic_in_create_state
+    - test_types_in_equals
+    - unnecesary_statements
+    - use_key_in_widget_constructors
+    - always_declare_return_types
