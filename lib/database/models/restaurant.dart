@@ -1,6 +1,6 @@
-import 'package:meta/meta.dart';
-import 'package:flutter/widgets.dart';
-import './meal.dart';
+import "package:meta/meta.dart";
+import "package:flutter/widgets.dart";
+import "./meal.dart";
 
 class Restaurant {
   String id;
@@ -21,13 +21,10 @@ class Restaurant {
       @required this.tags,
       @required this.mainImagePath,
       @required this.rating,
-      @required List<Meal?>? menu,
-      this.holidayIds,
-      this.description}):
-	  _menu=menu
-       	{
-    holidayIds ??= [];
-    description ??= 'Нет описания.';
-  }
+      @required List<Meal> menu,
+      this.holidayIds = const [],
+      this.description = "Нет описания."})
+      : _menu = menu;
   ImageProvider<dynamic> get mainImage => AssetImage(mainImagePath);
+  List<Meal> get menu => _menu;
 }

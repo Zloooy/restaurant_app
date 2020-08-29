@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:restaurant_app/ui/themes/theme_bloc.dart';
-import 'package:restaurant_app/ui/routing/routes.dart';
-import 'package:restaurant_app/utils/dp_extension/index.dart';
+import "package:flutter/material.dart";
+import "package:restaurant_app/ui/themes/theme_bloc.dart";
+import "package:restaurant_app/ui/routing/routes.dart";
+import "package:restaurant_app/utils/dp_extension/index.dart";
 
 class RestaurantApp extends StatefulWidget {
+  RestaurantApp({Key key}) : super(key: key);
   @override
-  _RestaurantAppState createState() => new _RestaurantAppState();
+  _RestaurantAppState createState() => _RestaurantAppState();
 }
 
 class _RestaurantAppState extends State<RestaurantApp> {

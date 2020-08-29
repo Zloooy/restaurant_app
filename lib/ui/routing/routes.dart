@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import '../screens/index.dart';
-import './route_names.dart';
+import "package:flutter/material.dart";
+import "../screens/index.dart";
+import "./route_names.dart";
 
 MaterialPageRoute _route(Widget f(BuildContext context)) =>
     MaterialPageRoute(builder: f);

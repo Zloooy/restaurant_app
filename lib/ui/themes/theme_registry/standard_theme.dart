@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import '../theme_constants.dart';
+import "package:flutter/material.dart";
+//Maybe later import "../theme_constants.dart";
 
-final ThemeData standard_theme = ThemeData(
+final ThemeData standardTheme = ThemeData(
     brightness: Brightness.light,
     accentColor: Colors.orange,
     primaryColor: Colors.white,

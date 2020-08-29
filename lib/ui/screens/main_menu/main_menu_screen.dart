@@ -1,15 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:restaurant_app/ui/screens/restaurant_list/restaurant_list_screen.dart';
-import 'package:vector_math/vector_math.dart' hide Colors;
-import 'dart:math';
-import './local_widgets/hexagonal_button.dart';
-import 'package:restaurant_app/utils/dp_extension/index.dart';
-import 'package:restaurant_app/ui/routing/route_names.dart';
+import "dart:math";
+import "package:flutter/material.dart";
+import "package:restaurant_app/ui/screens/restaurant_list/restaurant_list_screen.dart";
+import "package:vector_math/vector_math.dart" hide Colors;
+import "package:restaurant_app/utils/dp_extension/index.dart";
+import "package:restaurant_app/ui/routing/route_names.dart";
+import "./local_widgets/hexagonal_button.dart";
 
 class MainMenuScreen extends StatelessWidget {
   static final double buttonDiameter = 40;
   static final double buttonRadius = buttonDiameter / 2;
   static final double padding = 15;
+  MainMenuScreen({Key key}) : super(key: key);
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final Vector2 distanceV = Vector2(0, buttonRadius.dp * sqrt(3) + padding);
@@ -18,7 +20,7 @@ class MainMenuScreen extends StatelessWidget {
             Vector2.all(buttonRadius.dp);
     print("top $topPosV");
     //IDK why here padding is needed
-    final Vector2 bottomPosV = (topPosV + distanceV);
+    final Vector2 bottomPosV = topPosV + distanceV;
     print("bottom $bottomPosV");
     //
     final Vector2 rightPosV =
@@ -26,7 +28,7 @@ class MainMenuScreen extends StatelessWidget {
     final Vector2 leftPosV =
         topPosV + (distanceV.clone()..postmultiply(Matrix2.rotation(-pi / 3)));
     return Scaffold(
-        body: Container(
+        body: SizedBox(
             width: size.width,
             height: size.height,
             child: Stack(
@@ -42,7 +44,9 @@ class MainMenuScreen extends StatelessWidget {
                           text: "На открытом воздухе",
                           onPressed: () =>
                               Navigator.of(context).pushNamed(landing_route)
-                          /*onPressed:()=>Navigator.of(context).pushNamed(restaurant_list_route, arguments:{
+                          /*onPressed:()=>Navigator.of(context).pushNamed(
+			    restaurant_list_route,
+			    arguments:{
 										RestaurantListScreen.TITLE:"На открытом воздухе",
 										RestaurantListScreen.QUERY_CALLBACK:(q)=>{}
 									})*/

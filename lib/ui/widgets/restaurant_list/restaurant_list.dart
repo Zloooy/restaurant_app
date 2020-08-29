@@ -1,6 +1,6 @@
-import 'package:flutter/widgets.dart';
-import 'package:restaurant_app/database/models/restaurant.dart';
-import './restaurant_item.dart';
+import "package:flutter/widgets.dart";
+import "package:restaurant_app/database/models/restaurant.dart";
+import "./restaurant_item.dart";
 
 class RestaurantList extends StatelessWidget {
   final List<Restaurant> _restaurants;
@@ -12,7 +12,7 @@ class RestaurantList extends StatelessWidget {
       ? SliverList(
           delegate: SliverChildBuilderDelegate((BuildContext context, int i) {
           print("restaurant list: building item $i");
-          return RestaurantItem(_restaurants[i], onTap: this.onTap);
+          return RestaurantItem(_restaurants[i], onTap: onTap);
         }, childCount: _restaurants.length))
       : SliverToBoxAdapter(child: Center(child: Text("No restaurants")));
 }

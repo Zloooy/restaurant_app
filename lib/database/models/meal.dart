@@ -1,11 +1,15 @@
-import 'package:meta/meta.dart';
-import 'package:flutter/widgets.dart';
+import "package:meta/meta.dart";
+import "package:flutter/widgets.dart";
 
 class Meal {
   String id;
   String name;
   double price;
   String imagePath;
-  Meal({@required this.id, @required this.name, @required this.price, @required this.imagePath});
+  Meal(
+      {@required this.id,
+      @required this.name,
+      @required this.price,
+      @required this.imagePath});
   ImageProvider<dynamic> get image => AssetImage(imagePath);
 }

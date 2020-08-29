@@ -1,35 +1,34 @@
-import 'package:rxdart/rxdart.dart';
-import 'package:restaurant_app/database/index.dart';
+import "package:rxdart/rxdart.dart";
+import "package:restaurant_app/database/index.dart";
 
 class RestaurantSearchBloc {
   RestaurantDatabase _db = RestaurantDatabase();
   //Restaurant list & its props
   BehaviorSubject<List<Restaurant>> _restaurantListHandler;
   Stream<List<Restaurant>> _restaurantListHandlerStream;
-  BehaviorSubject<String> _restaurantNameHandler =
-      new BehaviorSubject<String>();
-  BehaviorSubject<String> _restaurantTagHandler = new BehaviorSubject<String>();
+  BehaviorSubject<String> _restaurantNameHandler = BehaviorSubject<String>();
+  BehaviorSubject<String> _restaurantTagHandler = BehaviorSubject<String>();
   BehaviorSubject<List<String>> _restaurantTagListHandler;
   BehaviorSubject<Holiday> _restaurantHolidayHandler =
-      new BehaviorSubject<Holiday>();
-  BehaviorSubject<Null> _restaurantAllHandler = new BehaviorSubject<Null>();
+      BehaviorSubject<Holiday>();
+  BehaviorSubject<Null> _restaurantAllHandler = BehaviorSubject<Null>();
   //Single Restaurant & its props
   BehaviorSubject<Restaurant> _oneRestaurantHandler;
   Stream<Restaurant> _oneRestaurantStream;
-  BehaviorSubject<String> _restaurantIdHandler = new BehaviorSubject<String>();
+  BehaviorSubject<String> _restaurantIdHandler = BehaviorSubject<String>();
   //Holiday list & its props
   BehaviorSubject<List<Holiday>> _holidayListHandler;
   Stream<List<Holiday>> _holidayListHandlerStream;
   BehaviorSubject<List<Ad>> _adListHandler;
-  BehaviorSubject<Null> _holidayHandler = new BehaviorSubject<Null>();
+  BehaviorSubject<Null> _holidayHandler = BehaviorSubject<Null>();
   //Ad list & its props
   Stream<List<Ad>> _adHandlerStream;
-  BehaviorSubject<Null> _adHandler = new BehaviorSubject<Null>();
+  BehaviorSubject<Null> _adHandler = BehaviorSubject<Null>();
   RestaurantSearchBloc() {
     _restaurantListHandler =
-        new BehaviorSubject<List<Restaurant>>.seeded(_db.getRestaurants());
+        BehaviorSubject<List<Restaurant>>.seeded(_db.getRestaurants());
     _restaurantTagListHandler =
-        new BehaviorSubject<List<String>>.seeded(_db.getRestaurantTags());
+        BehaviorSubject<List<String>>.seeded(_db.getRestaurantTags());
     _restaurantListHandlerStream = _restaurantListHandler.mergeWith([
       _restaurantNameHandler.stream
           .map<List<Restaurant>>(_db.getRestaurantsByName),
@@ -41,15 +40,15 @@ class RestaurantSearchBloc {
           .map<List<Restaurant>>((_) => _db.getRestaurants())
     ]);
 
-    _oneRestaurantHandler = new BehaviorSubject<Restaurant>();
+    _oneRestaurantHandler = BehaviorSubject<Restaurant>();
     _oneRestaurantStream = _oneRestaurantHandler
         .mergeWith([_restaurantIdHandler.map(_db.getRestaurantById)]);
     _holidayListHandler =
-        new BehaviorSubject<List<Holiday>>.seeded(_db.getHolidays());
+        BehaviorSubject<List<Holiday>>.seeded(_db.getHolidays());
     _holidayListHandlerStream = _holidayListHandler
         .mergeWith([_holidayHandler.map((_) => _db.getHolidays())]);
 
-    _adListHandler = new BehaviorSubject<List<Ad>>.seeded(_db.getAds());
+    _adListHandler = BehaviorSubject<List<Ad>>.seeded(_db.getAds());
     _adHandlerStream =
         _adListHandler.mergeWith([_adHandler.map((_) => _db.getAds())]);
   }

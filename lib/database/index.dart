@@ -1,2 +1,2 @@
-export 'restaurant_database.dart';
-export 'models/index.dart';
+export "models/index.dart";
+export "restaurant_database.dart";

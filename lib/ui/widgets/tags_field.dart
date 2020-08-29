@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class TagsField extends StatelessWidget {
   final void Function(String) _tagCallback;
@@ -10,7 +10,7 @@ class TagsField extends StatelessWidget {
           .map((tag) => ChoiceChip(
                 label: Text(tag),
                 selected: false,
-                onSelected: (sel) => (sel) ? _tagCallback(tag) : null,
+                onSelected: (sel) => sel ? _tagCallback(tag) : null,
               ))
           .toList());
 }

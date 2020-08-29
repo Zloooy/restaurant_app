@@ -8,14 +8,16 @@ import "./local_blocs/flexible_space_bloc.dart";
 class RestaurantDetailsScreen extends StatefulWidget {
   static const String RESTAURANT_ID = "restaurant_id";
   final String restaurantId;
-  RestaurantDetailsScreen({@required this.restaurantId});
+  RestaurantDetailsScreen({@required this.restaurantId, Key key})
+      : super(key: key);
+  @override
   _RestaurantDetailsScreenState createState() =>
-      new _RestaurantDetailsScreenState();
+      _RestaurantDetailsScreenState();
 }
 
 class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
-  final RestaurantSearchBloc _bloc = new RestaurantSearchBloc();
-  final FlexibleSpaceBloc _flexBloc = new FlexibleSpaceBloc();
+  final RestaurantSearchBloc _bloc = RestaurantSearchBloc();
+  final FlexibleSpaceBloc _flexBloc = FlexibleSpaceBloc();
   final ScrollController _controller = ScrollController();
   bool _collapsed = false;
   _RestaurantDetailsScreenState();
@@ -23,11 +25,12 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
   void initState() {
     super.initState();
     _bloc.getRestaurantById(widget.restaurantId);
-    _flexBloc.setCollapsed(_collapsed);
-    _controller.addListener(() => _flexBloc.setCollapsed(
-        (_controller.offset > 45.dp && !_controller.position.outOfRange)));
+    _flexBloc.isCollapsed = _collapsed;
+    _controller.addListener(() => _flexBloc.isCollapsed =
+        _controller.offset > 45.dp && !_controller.position.outOfRange);
   }
 
+  @override
   Widget build(BuildContext context) => StreamBuilder<Restaurant>(
       stream: _bloc.singleRestaurantStream,
       builder: (context, snapshot) => (!snapshot.hasData)
@@ -41,7 +44,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                     floating: true,
                     pinned: true,
                     flexibleSpace: StreamBuilder<bool>(
-                        stream: _flexBloc.isCollapsed,
+                        stream: _flexBloc.isCollapsedStream,
                         builder: (context, boolSnapshot) {
                           return FlexibleSpaceBar(
                               title: (boolSnapshot.hasData && boolSnapshot.data)

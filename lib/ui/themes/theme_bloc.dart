@@ -1,6 +1,6 @@
-import 'package:rxdart/rxdart.dart';
-import 'package:flutter/material.dart' show ThemeData;
-import './theme_registry/index.dart';
+import "package:rxdart/rxdart.dart";
+import "package:flutter/material.dart" show ThemeData;
+import "./theme_registry/index.dart";
 
 class ThemeBloc {
   static final ThemeBloc _instance = ThemeBloc._create();
@@ -11,14 +11,13 @@ class ThemeBloc {
     return _instance;
   }
   ThemeBloc._create()
-      : _themeDataController =
-            new BehaviorSubject<ThemeData>.seeded(DEFAULT_THEME),
-        _themeNameController = new BehaviorSubject<String>() {
+      : _themeDataController = BehaviorSubject<ThemeData>.seeded(defaultTheme),
+        _themeNameController = BehaviorSubject<String>() {
     _themeDataOutput = _themeDataController.mergeWith([
       _themeNameController
-          .where(theme_dict.containsKey)
+          .where(themeDict.containsKey)
           .distinct()
-          .map((themeName) => theme_dict[themeName])
+          .map((themeName) => themeDict[themeName])
     ]);
   }
   Stream<ThemeData> get themeStream => _themeDataOutput;

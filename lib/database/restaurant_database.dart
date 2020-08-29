@@ -1,7 +1,7 @@
-import './models/index.dart';
+import "./models/index.dart";
 
-typedef int RestaurantSorter(Restaurant r1, Restaurant r2);
-typedef bool RestaurantFilter(Restaurant r);
+typedef RestaurantSorter = int Function(Restaurant r1, Restaurant r2);
+typedef RestaurantFilter = bool Function(Restaurant r);
 
 class RestaurantDatabase {
   static final RestaurantDatabase _singleton = RestaurantDatabase._create();
@@ -19,6 +19,7 @@ class RestaurantDatabase {
           mainImagePath: "assets/burger_shot.jpg",
           address: "ул. Ивана Иванова, 2",
           description: "Kill your Hunger!",
+          menu: [],
           tags: ["фастфуд"]),
       Restaurant(
           id: "2",
@@ -27,7 +28,8 @@ class RestaurantDatabase {
           cuisine: "Итальянская кухня",
           mainImagePath: "assets/well_stacked_pizza.jpg",
           address: "ул. Ивана Федорова, 33",
-          description: "Eat till you say \"No, please\"",
+          description: 'Eat till you say "No, please"',
+          menu: [],
           tags: ["пицца"]),
       Restaurant(
         id: "3",
@@ -37,6 +39,7 @@ class RestaurantDatabase {
         mainImagePath: "assets/cluckin_bell.jpg",
         address: "ул. Васи Пупкина, 43",
         tags: ["цыплёнок"],
+        menu: [],
         holidayIds: ["new_year"],
       ),
     ];
@@ -61,7 +64,7 @@ class RestaurantDatabase {
   List<Restaurant> getRestaurantsByTag(String tag, {RestaurantSorter sorter}) =>
       _getRestaurants(filter: (r) => r.tags.contains(tag), sorter: sorter);
   List<Restaurant> getRestaurantByHoliday(Holiday holiday) =>
-      _getRestaurants(filter: ((r) => r.holidayIds.contains(holiday.id)));
+      _getRestaurants(filter: (r) => r.holidayIds.contains(holiday.id));
   List<Restaurant> getRestaurants() => _restaurants;
   Restaurant getRestaurantById(String id) =>
       _restaurants.firstWhere((r) => r.id == id, orElse: () => null);

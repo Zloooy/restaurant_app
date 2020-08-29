@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:vector_math/vector_math.dart';
-import 'dart:math';
+import "dart:math";
+import "package:vector_math/vector_math.dart";
+import "package:flutter/material.dart";
 
 class HexagonalButton extends StatelessWidget {
   final double diameter;
@@ -11,21 +11,24 @@ class HexagonalButton extends StatelessWidget {
       {@required this.child,
       this.diameter = double.infinity,
       this.borderRadius = const Radius.circular(0),
-      @required this.onPressed});
+      @required this.onPressed,
+      Key key})
+      : super(key: key);
+  @override
   Widget build(BuildContext context) => RaisedButton(
-      onPressed: this.onPressed,
-      shape: HexagonalBorder(borderRadius: this.borderRadius),
+      onPressed: onPressed,
+      shape: HexagonalBorder(borderRadius: borderRadius),
       child: SizedBox(
-        width: this.diameter,
-        height: this.diameter,
+        width: diameter,
+        height: diameter,
         child: Padding(
           padding: EdgeInsets.only(
               //magic numbers
-              top: this.diameter / 6,
-              bottom: this.diameter / 6,
-              left: this.diameter / 6,
-              right: this.diameter / 6),
-          child: this.child,
+              top: diameter / 6,
+              bottom: diameter / 6,
+              left: diameter / 6,
+              right: diameter / 6),
+          child: child,
         ),
       ));
 }
@@ -52,9 +55,9 @@ class HexagonalBorder extends ShapeBorder {
     //print("min param ${min(rect.width, rect.height)}");
     //Vector2 pos = Vector2(0,0);
     double rotationAngle = -pi / 3;
-    Vector2 sideVector = new Vector2(min(rect.width, rect.height), 0);
+    Vector2 sideVector = Vector2(min(rect.width, rect.height), 0);
     Matrix2 rotationMatrix = Matrix2.rotation(rotationAngle);
-    Path res = new Path()
+    Path res = Path()
       ..moveTo(rect.left + rect.width / 2 + sideVector.length / 4,
           rect.top + borderRadius.y.abs());
     /*pos

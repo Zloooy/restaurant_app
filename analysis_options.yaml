@@ -9,6 +9,34 @@ linter:
     - no_duplicate_case_values
     - no_logic_in_create_state
     - test_types_in_equals
-    - unnecesary_statements
+    - unnecessary_statements
     - use_key_in_widget_constructors
     - always_declare_return_types
+    - annotate_overrides
+    - avoid_escaping_inner_quotes
+    - avoid_positional_boolean_parameters
+    - avoid_renaming_method_parameters
+    - avoid_return_types_on_setters
+    - avoid_returning_null_for_void
+    - avoid_unnecessary_containers
+    - camel_case_types
+    - directives_ordering
+    - empty_constructor_bodies
+    - file_names
+    - lines_longer_than_80_chars
+    - non_constant_identifier_names
+    - prefer_conditional_assignment
+    - prefer_double_quotes
+    - prefer_foreach
+    - provide_deprecation_message
+    - recursive_getters
+    - sized_box_for_whitespace
+    - unnecessary_brace_in_string_interps
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_parenthesis
+    - unnecessary_raw_strings
+    - unnecessary_string_escapes
+    - unnecessary_this
+    - use_full_hex_values_for_flutter_colors
+    - use_setters_to_change_properties
+    - void_checks

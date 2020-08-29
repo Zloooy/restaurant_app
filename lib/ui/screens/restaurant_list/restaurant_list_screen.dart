@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:restaurant_app/temporary_blocs/restaurant_search_bloc.dart';
-import 'package:restaurant_app/ui/widgets/restaurant_list/restaurant_list.dart';
-import 'package:restaurant_app/database/models/index.dart';
+import "package:flutter/material.dart";
+import "package:restaurant_app/temporary_blocs/restaurant_search_bloc.dart";
+import "package:restaurant_app/ui/widgets/restaurant_list/restaurant_list.dart";
+import "package:restaurant_app/database/models/index.dart";
 
 class RestaurantListScreen extends StatefulWidget {
   //keys to pass arguments
@@ -13,13 +13,13 @@ class RestaurantListScreen extends StatefulWidget {
       {@required this.title, @required this.queryCallback, Key key})
       : super(key: key);
   @override
-  _RestaurantListScreenState createState() => new _RestaurantListScreenState();
+  _RestaurantListScreenState createState() => _RestaurantListScreenState();
 }
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
   final RestaurantSearchBloc _bloc = RestaurantSearchBloc();
   @override
-  initState() {
+  void initState() {
     print("rls initing state");
     widget.queryCallback(_bloc);
     super.initState();
@@ -37,7 +37,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
               initialData: [],
               builder: (context, snapshot) => snapshot.hasData
                   ? RestaurantList(snapshot.data)
-                  : SliverToBoxAdapter(child: Container(width: 0, height: 0)))
+                  : SliverToBoxAdapter(child: SizedBox(width: 0, height: 0)))
         ]));
   }
 
