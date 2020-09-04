@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:restaurant_app/utils/dp_extension/dp_extension.dart";
 
 class RatingWidget extends StatelessWidget {
   final double rating;
@@ -6,7 +7,8 @@ class RatingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-        Icon(Icons.star),
+        Icon(Icons.star, color: Theme.of(context).accentColor),
+	SizedBox(width:3.dp),
         Text("$rating",
             style: Theme.of(context)
                 .textTheme

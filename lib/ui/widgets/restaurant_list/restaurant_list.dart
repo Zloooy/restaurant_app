@@ -7,8 +7,8 @@ class RestaurantList extends StatelessWidget {
   final RestaurantCallback onTap;
   RestaurantList(this._restaurants, {Key key, this.onTap}) : super(key: key);
   @override
-  Widget build(BuildContext context) => (_restaurants != null ||
-          _restaurants.length > 0)
+  Widget build(BuildContext context) =>
+  (_restaurants != null || _restaurants.length > 0)
       ? SliverList(
           delegate: SliverChildBuilderDelegate((BuildContext context, int i) {
           print("restaurant list: building item $i");

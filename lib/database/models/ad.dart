@@ -2,7 +2,17 @@ import "package:meta/meta.dart";
 import "package:flutter/material.dart";
 
 class Ad {
+  final String id;
   final String imagePath;
-  Ad({@required this.imagePath});
+  final String restaurantId;
+  String description;
+  String title;
+  Ad({
+	  @required this.id,
+	  @required this.restaurantId,
+	  @required this.imagePath,
+	  this.description = "Нет описания.",
+	  this.title = "Реклама"
+	  });
   ImageProvider<dynamic> get image => AssetImage(imagePath);
 }

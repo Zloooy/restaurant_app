@@ -8,6 +8,7 @@ class Restaurant {
   String cuisine;
   String description;
   String address;
+  String phone;
   List<String> tags;
   List<String> holidayIds;
   double rating;
@@ -22,6 +23,7 @@ class Restaurant {
       @required this.mainImagePath,
       @required this.rating,
       @required List<Meal> menu,
+      this.phone = "Нет телефона",
       this.holidayIds = const [],
       this.description = "Нет описания."})
       : _menu = menu;

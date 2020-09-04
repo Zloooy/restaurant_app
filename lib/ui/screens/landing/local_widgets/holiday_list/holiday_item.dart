@@ -21,8 +21,13 @@ class HolidayItem extends StatelessWidget {
       child: Card(
           elevation: ELEVATION,
           shape: BORDER_SHAPE,
-          child: Column(children: [
-            Image(height: 20.dp, image: holiday.icon),
-            Text(holiday.name)
-          ])));
+          child: Padding(
+            padding: EdgeInsets.all(1.dp),
+            child: Column(children: [
+              Image(height: 20.dp, image: holiday.icon),
+              Text(holiday.name,
+			    style:Theme.of(context).textTheme.subtitle1
+			    )
+            ]),
+          )));
 }

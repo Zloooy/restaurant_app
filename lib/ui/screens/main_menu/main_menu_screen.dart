@@ -60,7 +60,8 @@ class MainMenuScreen extends StatelessWidget {
                           onPressed: () => Navigator.of(context)
                                   .pushNamed(restaurant_list_route, arguments: {
                                 RestaurantListScreen.TITLE: "Первое свидание",
-                                RestaurantListScreen.QUERY_CALLBACK: (q) => {}
+                                RestaurantListScreen.QUERY_CALLBACK: (q) => {},
+				RestaurantListScreen.IS_CLICKABLE: true,
                               }))),
                   Positioned(
                       left: rightPosV.x,
@@ -71,7 +72,8 @@ class MainMenuScreen extends StatelessWidget {
                           onPressed: () => Navigator.of(context)
                                   .pushNamed(restaurant_list_route, arguments: {
                                 RestaurantListScreen.TITLE: "Тёплый вечер",
-                                RestaurantListScreen.QUERY_CALLBACK: (q) => {}
+                                RestaurantListScreen.QUERY_CALLBACK: (q) => {},
+				RestaurantListScreen.IS_CLICKABLE: true,
                               }))),
                   Positioned(
                       left: bottomPosV.x,
@@ -79,17 +81,29 @@ class MainMenuScreen extends StatelessWidget {
                       child: _mainMenuButton(context,
                           iconPath: "assets/collection.png",
                           text: "Наборы",
-                          onPressed: () {})),
+                          onPressed: () =>
+			  Navigator.of(context).pushNamed(kit_route))),
                   Align(
                       alignment: Alignment.bottomLeft,
                       child: _bottomButton(
                         child: Icon(Icons.search),
+			onPressed: ()=>Navigator.of(context).pushNamed(restaurant_list_route,
+					arguments:{
+						RestaurantListScreen.TITLE:"Поиск",
+						RestaurantListScreen.QUERY_CALLBACK: (q) =>{},
+						RestaurantListScreen.IS_CLICKABLE: true,
+						RestaurantListScreen.SHOW_SEARCH_BAR: true
+					}
+					)
                       )),
                   Align(
                       alignment: Alignment.bottomRight,
                       child: _bottomButton(
                           child: ImageIcon(AssetImage("assets/account.png")),
-                          onPressed: () {}))
+                          onPressed: () =>
+			  Navigator.of(context).pushNamed(account_route)
+		      )
+		  )
                 ])));
   }
 
@@ -110,12 +124,13 @@ class MainMenuScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .caption
+                        .subtitle1
                         .copyWith(fontSize: 10.81))
               ]),
           borderRadius: Radius.circular(10),
           diameter: buttonDiameter.dp);
   Widget _bottomButton({@required Widget child, VoidCallback onPressed}) =>
       SizedBox(
-          height: 25.dp, child: RaisedButton(child: child, onPressed: () {}));
+          height: 25.dp,
+	  child: RaisedButton(child: child, onPressed: onPressed));
 }

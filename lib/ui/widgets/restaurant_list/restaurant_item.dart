@@ -44,9 +44,9 @@ class RestaurantItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               RatingWidget(rating: _restaurant.rating),
-                              SizedBox(width: 2.0.dp),
+                              SizedBox(width: 5.0.dp),
                               Text(_restaurant.cuisine,
-                                  style: Theme.of(context).textTheme.caption,
+                                  style: Theme.of(context).textTheme.subtitle1,
                                   textAlign: TextAlign.right)
                             ]),
                       ]))),

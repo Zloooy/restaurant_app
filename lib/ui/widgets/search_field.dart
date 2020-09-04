@@ -17,18 +17,13 @@ class _SearchFieldState extends State<SearchField> {
       padding: EdgeInsets.all(20.0),
       child: Row(key: _fieldkey, children: [
         Expanded(
-          flex: 8,
           child: TextField(
               decoration: InputDecoration(filled: true, border: INPUT_BORDER),
               controller: _textController),
         ),
-        Expanded(flex: 1, child: SizedBox()),
-        Expanded(
-            flex: 1,
-            child: FlatButton(
-                shape: BORDER_SHAPE,
-                child: Icon(Icons.search),
-                onPressed: () => widget._searchCallback(_textController.text)))
+        IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () => widget._searchCallback(_textController.text))
       ]));
   @override
   void dispose() {

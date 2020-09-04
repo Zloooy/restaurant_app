@@ -9,7 +9,7 @@ class HolidayList extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SliverToBoxAdapter(
       child: SizedBox(
-          height: 30.dp,
+          height: 33.dp,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: holidays.length,

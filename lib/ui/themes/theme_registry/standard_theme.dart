@@ -6,7 +6,13 @@ final ThemeData standardTheme = ThemeData(
     accentColor: Colors.orange,
     primaryColor: Colors.white,
     iconTheme: IconThemeData(
-      color: Colors.orange,
+      color: Colors.black,
+    ),
+    primaryIconTheme: IconThemeData(
+		    color: Colors.black
+    ),
+    accentIconTheme: IconThemeData(
+		    color:Colors.orange
     ),
     buttonTheme:
         ButtonThemeData(buttonColor: Colors.white, shape: CircleBorder())
