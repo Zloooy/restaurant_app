@@ -20,39 +20,38 @@ class RestaurantRouter {
         break;
       case restaurant_list_route:
         print("restaurant_router: routing to restaurant list");
-        Map<String, dynamic> data = settings.arguments as Map<String, dynamic>;
+        Map<String, dynamic>? data = settings.arguments as Map<String, dynamic>?;
         res = _noContext(() => RestaurantListScreen(
-            title: data[RestaurantListScreen.TITLE],
+            title: data![RestaurantListScreen.TITLE],
             queryCallback: data[RestaurantListScreen.QUERY_CALLBACK],
-	    isClickable: data[RestaurantListScreen.IS_CLICKABLE] ?? false,
-	    showSearchBar: data[RestaurantListScreen.SHOW_SEARCH_BAR] ?? false
-	    ));
+            isClickable: data[RestaurantListScreen.IS_CLICKABLE] ?? false,
+            showSearchBar:
+                data[RestaurantListScreen.SHOW_SEARCH_BAR] ?? false));
         break;
       case restaurant_details_route:
-        Map<String, dynamic> data = settings.arguments as Map<String, dynamic>;
+        Map<String, dynamic>? data = settings.arguments as Map<String, dynamic>?;
         res = _noContext(() => RestaurantDetailsScreen(
-            restaurantId: data[RestaurantDetailsScreen.RESTAURANT_ID]
-	    ));
+            restaurantId: data![RestaurantDetailsScreen.RESTAURANT_ID]));
         break;
-	case meal_menu_route:
-	Map<String,dynamic> data = settings.arguments as Map<String, dynamic>;
-	res = _noContext(() => MealMenuScreen(
-					restaurantId: data[MealMenuScreen.RESTAURANT_ID]
-					));
-	break;
+      case meal_menu_route:
+        Map<String, dynamic>? data = settings.arguments as Map<String, dynamic>?;
+        res = _noContext(() =>
+            MealMenuScreen(restaurantId: data![MealMenuScreen.RESTAURANT_ID]));
+        break;
       case ad_details_route:
-	Map<String,dynamic> data = settings.arguments as Map<String, dynamic>;
-	res = _noContext(()=>AdDetailsScreen(adId:data[AdDetailsScreen.AD_ID]));
-	break;
+        Map<String, dynamic>? data = settings.arguments as Map<String, dynamic>?;
+        res = _noContext(
+            () => AdDetailsScreen(adId: data![AdDetailsScreen.AD_ID]));
+        break;
       case kit_route:
-	res = _noContext(()=>KitScreen());
-	break;
+        res = _noContext(() => KitScreen());
+        break;
       case cart_route:
-	res = _noContext(()=>CartScreen());
-	break;
+        res = _noContext(() => CartScreen());
+        break;
       case account_route:
-	res = _noContext(()=>AccountScreen());
-	break;
+        res = _noContext(() => AccountScreen());
+        break;
       default:
         res = _noContext(() => LandingScreen());
         //TODO make 404 screen

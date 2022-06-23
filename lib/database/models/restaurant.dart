@@ -1,4 +1,3 @@
-import "package:meta/meta.dart";
 import "package:flutter/widgets.dart";
 import "./meal.dart";
 
@@ -15,14 +14,14 @@ class Restaurant {
   final String mainImagePath;
   List<Meal> _menu;
   Restaurant(
-      {@required this.id,
-      @required this.name,
-      @required this.cuisine,
-      @required this.address,
-      @required this.tags,
-      @required this.mainImagePath,
-      @required this.rating,
-      @required List<Meal> menu,
+      {required this.id,
+      required this.name,
+      required this.cuisine,
+      required this.address,
+      required this.tags,
+      required this.mainImagePath,
+      required this.rating,
+      required List<Meal> menu,
       this.phone = "Нет телефона",
       this.holidayIds = const [],
       this.description = "Нет описания."})

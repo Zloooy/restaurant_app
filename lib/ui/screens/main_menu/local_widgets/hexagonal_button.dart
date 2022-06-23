@@ -8,16 +8,17 @@ class HexagonalButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Radius borderRadius;
   HexagonalButton(
-      {@required this.child,
+      {required this.child,
       this.diameter = double.infinity,
       this.borderRadius = const Radius.circular(0),
-      @required this.onPressed,
-      Key key})
+      required this.onPressed,
+      Key? key})
       : super(key: key);
   @override
-  Widget build(BuildContext context) => RaisedButton(
+  Widget build(BuildContext context) => ElevatedButton(
       onPressed: onPressed,
-      shape: HexagonalBorder(borderRadius: borderRadius),
+      style: ElevatedButton.styleFrom(
+          shape: HexagonalBorder(borderRadius: borderRadius)),
       child: SizedBox(
         width: diameter,
         height: diameter,
@@ -33,8 +34,8 @@ class HexagonalButton extends StatelessWidget {
       ));
 }
 
-class HexagonalBorder extends ShapeBorder {
-  final Radius borderRadius;
+class HexagonalBorder extends OutlinedBorder {
+  final Radius? borderRadius;
   HexagonalBorder({this.borderRadius});
 
   @override
@@ -43,14 +44,14 @@ class HexagonalBorder extends ShapeBorder {
   }
 
   @override
-  void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {}
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
 
   @override
-  Path getInnerPath(Rect rect, {TextDirection textDirection}) =>
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) =>
       getOuterPath(rect, textDirection: textDirection);
 
   @override
-  Path getOuterPath(Rect rect, {TextDirection textDirection}) {
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     print("given rect $rect");
     //print("min param ${min(rect.width, rect.height)}");
     //Vector2 pos = Vector2(0,0);
@@ -59,7 +60,7 @@ class HexagonalBorder extends ShapeBorder {
     Matrix2 rotationMatrix = Matrix2.rotation(rotationAngle);
     Path res = Path()
       ..moveTo(rect.left + rect.width / 2 + sideVector.length / 4,
-          rect.top + borderRadius.y.abs());
+          rect.top + borderRadius!.y.abs());
     /*pos
 				..x = (rect.left + rect.width/2)
 				..y = rect.top;*/
@@ -71,7 +72,7 @@ class HexagonalBorder extends ShapeBorder {
         ..normalize()
         ..postmultiply(halfRotationMatrix);
       hsClone *=
-          sqrt(pow(borderRadius.x.abs(), 2) + pow(borderRadius.y.abs(), 2));
+          sqrt(pow(borderRadius!.x.abs(), 2) + pow(borderRadius!.y.abs(), 2));
       //print("half side $halfSide");
       halfSide.postmultiply(rotationMatrix);
       res.relativeQuadraticBezierTo(
@@ -93,5 +94,9 @@ class HexagonalBorder extends ShapeBorder {
   }
 
   @override
-  ShapeBorder scale(double t) => null;
+  ShapeBorder scale(double t) => this;
+  @override
+  OutlinedBorder copyWith({BorderSide? side}) {
+    return HexagonalBorder(borderRadius: borderRadius);
+  }
 }

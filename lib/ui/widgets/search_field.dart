@@ -3,7 +3,7 @@ import "package:restaurant_app/ui/themes/theme_constants.dart";
 
 class SearchField extends StatefulWidget {
   final void Function(String) _searchCallback;
-  SearchField(this._searchCallback, {Key key}) : super(key: key);
+  SearchField(this._searchCallback, {Key? key}) : super(key: key);
   @override
   _SearchFieldState createState() => _SearchFieldState();
 }

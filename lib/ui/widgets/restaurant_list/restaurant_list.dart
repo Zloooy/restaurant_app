@@ -3,17 +3,17 @@ import "package:restaurant_app/database/models/restaurant.dart";
 import "./restaurant_item.dart";
 
 class RestaurantList extends StatelessWidget {
-  final List<Restaurant> _restaurants;
-  final RestaurantCallback onTap;
-  RestaurantList(this._restaurants, {Key key, this.onTap}) : super(key: key);
+  final List<Restaurant>? _restaurants;
+  final RestaurantCallback? onTap;
+  RestaurantList(this._restaurants, {Key? key, this.onTap}) : super(key: key);
   @override
-  Widget build(BuildContext context) =>
-  (_restaurants != null || _restaurants.length > 0)
+  Widget build(BuildContext context) => (_restaurants != null ||
+          _restaurants!.length > 0)
       ? SliverList(
           delegate: SliverChildBuilderDelegate((BuildContext context, int i) {
           print("restaurant list: building item $i");
-          return RestaurantItem(_restaurants[i], onTap: onTap);
-        }, childCount: _restaurants.length))
+          return RestaurantItem(_restaurants![i], onTap: onTap);
+        }, childCount: _restaurants!.length))
       : SliverToBoxAdapter(child: Center(child: Text("No restaurants")));
 }
 /*

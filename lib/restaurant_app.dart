@@ -1,10 +1,9 @@
 import "package:flutter/material.dart";
 import "package:restaurant_app/ui/themes/theme_bloc.dart";
 import "package:restaurant_app/ui/routing/routes.dart";
-import "package:restaurant_app/utils/dp_extension/index.dart";
 
 class RestaurantApp extends StatefulWidget {
-  RestaurantApp({Key key}) : super(key: key);
+  RestaurantApp({Key? key}) : super(key: key);
   @override
   _RestaurantAppState createState() => _RestaurantAppState();
 }
@@ -13,8 +12,7 @@ class _RestaurantAppState extends State<RestaurantApp> {
   final ThemeBloc _themeBloc = ThemeBloc();
   @override
   Widget build(BuildContext context) {
-    DpExtension(WidgetsBinding.instance.window);
-    return StreamBuilder<ThemeData>(
+    return StreamBuilder<ThemeData?>(
         stream: _themeBloc.themeStream,
         builder: (context, snapshot) => MaterialApp(
               theme: snapshot.data,

@@ -10,9 +10,10 @@ class MainMenuScreen extends StatelessWidget {
   static final double buttonDiameter = 40;
   static final double buttonRadius = buttonDiameter / 2;
   static final double padding = 15;
-  MainMenuScreen({Key key}) : super(key: key);
+  MainMenuScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    DpExtension(MediaQuery.of(context).devicePixelRatio);
     final size = MediaQuery.of(context).size;
     final Vector2 distanceV = Vector2(0, buttonRadius.dp * sqrt(3) + padding);
     final Vector2 topPosV =
@@ -34,7 +35,7 @@ class MainMenuScreen extends StatelessWidget {
             child: Stack(
                 alignment: AlignmentDirectional.center,
                 fit: StackFit.passthrough,
-                overflow: Overflow.clip,
+                clipBehavior: Clip.antiAlias,
                 children: [
                   Positioned(
                       left: topPosV.x,
@@ -61,7 +62,7 @@ class MainMenuScreen extends StatelessWidget {
                                   .pushNamed(restaurant_list_route, arguments: {
                                 RestaurantListScreen.TITLE: "Первое свидание",
                                 RestaurantListScreen.QUERY_CALLBACK: (q) => {},
-				RestaurantListScreen.IS_CLICKABLE: true,
+                                RestaurantListScreen.IS_CLICKABLE: true,
                               }))),
                   Positioned(
                       left: rightPosV.x,
@@ -73,7 +74,7 @@ class MainMenuScreen extends StatelessWidget {
                                   .pushNamed(restaurant_list_route, arguments: {
                                 RestaurantListScreen.TITLE: "Тёплый вечер",
                                 RestaurantListScreen.QUERY_CALLBACK: (q) => {},
-				RestaurantListScreen.IS_CLICKABLE: true,
+                                RestaurantListScreen.IS_CLICKABLE: true,
                               }))),
                   Positioned(
                       left: bottomPosV.x,
@@ -82,35 +83,31 @@ class MainMenuScreen extends StatelessWidget {
                           iconPath: "assets/collection.png",
                           text: "Наборы",
                           onPressed: () =>
-			  Navigator.of(context).pushNamed(kit_route))),
+                              Navigator.of(context).pushNamed(kit_route))),
                   Align(
                       alignment: Alignment.bottomLeft,
                       child: _bottomButton(
-                        child: Icon(Icons.search),
-			onPressed: ()=>Navigator.of(context).pushNamed(restaurant_list_route,
-					arguments:{
-						RestaurantListScreen.TITLE:"Поиск",
-						RestaurantListScreen.QUERY_CALLBACK: (q) =>{},
-						RestaurantListScreen.IS_CLICKABLE: true,
-						RestaurantListScreen.SHOW_SEARCH_BAR: true
-					}
-					)
-                      )),
+                          child: Icon(Icons.search),
+                          onPressed: () => Navigator.of(context)
+                                  .pushNamed(restaurant_list_route, arguments: {
+                                RestaurantListScreen.TITLE: "Поиск",
+                                RestaurantListScreen.QUERY_CALLBACK: (q) => {},
+                                RestaurantListScreen.IS_CLICKABLE: true,
+                                RestaurantListScreen.SHOW_SEARCH_BAR: true
+                              }))),
                   Align(
                       alignment: Alignment.bottomRight,
                       child: _bottomButton(
                           child: ImageIcon(AssetImage("assets/account.png")),
                           onPressed: () =>
-			  Navigator.of(context).pushNamed(account_route)
-		      )
-		  )
+                              Navigator.of(context).pushNamed(account_route)))
                 ])));
   }
 
   Widget _mainMenuButton(context,
-          {@required String iconPath,
-          @required String text,
-          @required VoidCallback onPressed}) =>
+          {required String iconPath,
+          required String text,
+          required VoidCallback onPressed}) =>
       HexagonalButton(
           onPressed: onPressed,
           child: Column(
@@ -124,13 +121,19 @@ class MainMenuScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle1
+                        .subtitle1!
                         .copyWith(fontSize: 10.81))
               ]),
           borderRadius: Radius.circular(10),
           diameter: buttonDiameter.dp);
-  Widget _bottomButton({@required Widget child, VoidCallback onPressed}) =>
-      SizedBox(
-          height: 25.dp,
-	  child: RaisedButton(child: child, onPressed: onPressed));
+  Widget _bottomButton(
+          {required Widget child, VoidCallback? onPressed}) =>
+      Padding(
+          padding: EdgeInsets.all(10.0),
+          child: SizedBox(
+              height: 25.dp,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(shape: CircleBorder()),
+                  child: child,
+                  onPressed: onPressed)));
 }

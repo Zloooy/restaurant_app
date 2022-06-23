@@ -10,7 +10,7 @@ final RestaurantCallback _noAction = (r) {};
 class RestaurantItem extends StatelessWidget {
   final Restaurant _restaurant;
   final RestaurantCallback _onTap;
-  RestaurantItem(this._restaurant, {Key key, RestaurantCallback onTap})
+  RestaurantItem(this._restaurant, {Key? key, RestaurantCallback? onTap})
       : _onTap = onTap ?? _noAction,
         super(key: key);
   @override
@@ -27,7 +27,7 @@ class RestaurantItem extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         topLeft: CIRCULAR_RADIUS, topRight: CIRCULAR_RADIUS),
                     image: DecorationImage(
-                      image: _restaurant.mainImage,
+                      image: _restaurant.mainImage as ImageProvider<Object>,
                       fit: BoxFit.fitWidth,
                     ),
                   ),

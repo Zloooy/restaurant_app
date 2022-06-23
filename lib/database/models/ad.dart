@@ -1,4 +1,3 @@
-import "package:meta/meta.dart";
 import "package:flutter/material.dart";
 
 class Ad {
@@ -7,12 +6,11 @@ class Ad {
   final String restaurantId;
   String description;
   String title;
-  Ad({
-	  @required this.id,
-	  @required this.restaurantId,
-	  @required this.imagePath,
-	  this.description = "Нет описания.",
-	  this.title = "Реклама"
-	  });
+  Ad(
+      {required this.id,
+      required this.restaurantId,
+      required this.imagePath,
+      this.description = "Нет описания.",
+      this.title = "Реклама"});
   ImageProvider<dynamic> get image => AssetImage(imagePath);
 }

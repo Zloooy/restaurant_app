@@ -11,7 +11,7 @@ import "./local_widgets/ad_list/ad_list.dart";
 import "./local_widgets/holiday_list/holiday_list.dart";
 
 class LandingScreen extends StatefulWidget {
-  LandingScreen({Key key}) : super(key: key);
+  LandingScreen({Key? key}) : super(key: key);
   @override
   _LandingScreenState createState() => _LandingScreenState();
 }
@@ -30,45 +30,44 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
-          title: Text("Рестораны и кафе"),
-          actions: [IconButton(icon: Icon(Icons.search), 
-			onPressed: ()=>Navigator.of(context).pushNamed(restaurant_list_route,
-					arguments:{
-						RestaurantListScreen.TITLE:"Поиск",
-						RestaurantListScreen.QUERY_CALLBACK: (q) =>{},
-						RestaurantListScreen.IS_CLICKABLE: true,
-						RestaurantListScreen.SHOW_SEARCH_BAR: true
-					}
-					)
-	  )
-	  ],
+        title: Text("Рестораны и кафе"),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () => Navigator.of(context)
+                      .pushNamed(restaurant_list_route, arguments: {
+                    RestaurantListScreen.TITLE: "Поиск",
+                    RestaurantListScreen.QUERY_CALLBACK: (q) => {},
+                    RestaurantListScreen.IS_CLICKABLE: true,
+                    RestaurantListScreen.SHOW_SEARCH_BAR: true
+                  }))
+        ],
       ),
       body: CustomScrollView(slivers: [
         SliverToBoxAdapter(), // Don"t touch: it"s Flutter bug. Read https://github.com/flutter/flutter/issues/55170 .
-        StreamBuilder<List<Ad>>(
+        StreamBuilder<List<Ad>?>(
           stream: _bloc.adStream,
           builder: (context, snapshot) => snapshot.hasData
-              ? AdList(ads: snapshot.data,
-			      onTap:(ad)=>
-			      Navigator.of(context).pushNamed(ad_details_route,
-					      arguments: {AdDetailsScreen.AD_ID:ad.id})
-			      )
+              ? AdList(
+                  ads: snapshot.data,
+                  onTap: (ad) => Navigator.of(context).pushNamed(
+                      ad_details_route,
+                      arguments: {AdDetailsScreen.AD_ID: ad.id}))
               : SliverToBoxAdapter(child: SizedBox(width: 0, height: 0)),
         ),
         SliverToBoxAdapter(child: SizedBox(width: 0, height: 7.dp)),
-        StreamBuilder<List<Holiday>>(
+        StreamBuilder<List<Holiday>?>(
             stream: _bloc.holidayStream,
             builder: (context, snapshot) => snapshot.hasData
                 ? HolidayList(holidays: snapshot.data)
                 : SliverToBoxAdapter(child: SizedBox(width: 0, height: 0))),
         SliverToBoxAdapter(child: SizedBox(width: 0, height: 5.dp)),
-        StreamBuilder<List<Restaurant>>(
+        StreamBuilder<List<Restaurant>?>(
             stream: _bloc.restaurantListStream,
             builder: (context, snapshot) => snapshot.hasData
                 ? RestaurantList(snapshot.data,
                     onTap: (r) => Navigator.of(context)
-                            .pushNamed(restaurant_details_route,
-					    arguments: {
+                            .pushNamed(restaurant_details_route, arguments: {
                           RestaurantDetailsScreen.RESTAURANT_ID: r.id
                         }))
                 : SliverToBoxAdapter(child: SizedBox(width: 0, height: 0)))

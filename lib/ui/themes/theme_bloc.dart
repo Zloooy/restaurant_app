@@ -6,7 +6,7 @@ class ThemeBloc {
   static final ThemeBloc _instance = ThemeBloc._create();
   BehaviorSubject<ThemeData> _themeDataController;
   final BehaviorSubject<String> _themeNameController;
-  Stream<ThemeData> _themeDataOutput;
+  Stream<ThemeData?>? _themeDataOutput;
   factory ThemeBloc() {
     return _instance;
   }
@@ -17,10 +17,10 @@ class ThemeBloc {
       _themeNameController
           .where(themeDict.containsKey)
           .distinct()
-          .map((themeName) => themeDict[themeName])
+          .map((themeName) => themeDict[themeName]!)
     ]);
   }
-  Stream<ThemeData> get themeStream => _themeDataOutput;
+  Stream<ThemeData?>? get themeStream => _themeDataOutput;
   void setTheme(String themeName) => _themeNameController.add(themeName);
   void dispose() {
     _themeDataController.close();

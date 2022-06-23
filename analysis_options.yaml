@@ -1,6 +1,3 @@
-analyzer:
-  enable-experiment:
-    - non-nullable
 linter:
   rules:
     - cancel_subscriptions

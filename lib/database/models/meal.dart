@@ -1,4 +1,3 @@
-import "package:meta/meta.dart";
 import "package:flutter/widgets.dart";
 
 class Meal {
@@ -7,11 +6,11 @@ class Meal {
   double price;
   String imagePath;
   Meal(
-      {@required this.id,
-      @required this.name,
-      @required this.price,
-      @required this.imagePath});
+      {required this.id,
+      required this.name,
+      required this.price,
+      required this.imagePath});
   ImageProvider<dynamic> get image => AssetImage(imagePath);
   @override
-  bool operator==(Object other) => (other is Meal) && other.id ==id;
+  bool operator ==(Object other) => (other is Meal) && other.id == id;
 }
