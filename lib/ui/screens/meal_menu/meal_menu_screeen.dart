@@ -32,6 +32,7 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
       body: FutureBuilder(
           future: _bloc.inited,
           builder: (context, fsnapshot) {
+            _bloc.searchMeals("");
             print("fsnapshot data: $fsnapshot.data");
             print("mealListStream ${_bloc.mealListStream}");
             return (fsnapshot.connectionState != ConnectionState.done)
@@ -39,7 +40,7 @@ class _MealMenuScreenState extends State<MealMenuScreen> {
                 : CustomScrollView(slivers: [
                     SliverAppBar(
                         title: Text("Меню"),
-                        expandedHeight: 50.dp,
+                        expandedHeight: 55.dp,
                         actions: [
                           StreamBuilder<int>(
                               stream: _cartBloc.productCountStream,

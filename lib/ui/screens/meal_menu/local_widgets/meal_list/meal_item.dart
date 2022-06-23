@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import "package:restaurant_app/ui/themes/theme_constants.dart";
 import "package:restaurant_app/database/models/meal.dart";
+import "package:restaurant_app/ui/themes/theme_constants.dart";
 import "package:restaurant_app/utils/dp_extension/index.dart";
 
 typedef MealCallback = void Function(Meal m);

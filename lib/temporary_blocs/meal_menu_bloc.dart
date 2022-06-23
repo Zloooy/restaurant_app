@@ -47,8 +47,6 @@ class MealMenuBloc {
           _mealListStream = _mealListHandler.mergeWith(streamList);
           print("mealListStream inited $_mealListStream");
         });
-    searchMeals(""); // empty string
-    searchMeals("112");
   }
   Future<void>? get inited => _inited;
   set restaurantId(String? id) => _restaurantIdHandler.sink.add(id);
